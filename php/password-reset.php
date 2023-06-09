@@ -24,7 +24,7 @@ if (!isset($_SESSION['id'])) {
   <script>
     alert('<?php echo $_SESSION['password_reset_error']; ?>');
   </script>
-<?php unset($_SESSION['password_reset_error']); endif; ?>
+<?php unset($_SESSION['password_reset_error']); endif; ?> <!-- Clear the password reset error from the session -->
     <h2>Reset Password</h2>
     <div id="form">
     <form method="post" action="../inc/reset-password-includes.php">

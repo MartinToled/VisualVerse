@@ -10,7 +10,7 @@ if (!isset($_SESSION['id'])) {
   
   // Check if the postid is provided in the URL
   if (!isset($_GET['postid'])) {
-    header("Location: profile.php");
+    header("Location: ../php/profile.php");
     exit();
   }
   
@@ -27,7 +27,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$row) {
     // The user doesn't have permission to edit the post
-    header("Location: profile.php");
+    header("Location: ../php/profile.php");
     exit();
 }
 
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $filename = uniqid() . '.' . $extension;
 
             // Move the uploaded image to the desired location
-            $destination = 'uploads/' . $filename;
+            $destination = '../php/uploads/' . $filename;
             if (move_uploaded_file($image['tmp_name'], $destination)) {
                 // Update the image path in the database
                 $stmt = $conn->prepare("UPDATE uploads SET images = :image_path WHERE uploads_id = :postid");
@@ -75,14 +75,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Update the caption and tags in the database if no error occurred
     if (!isset($error)) {
-        $stmt = $conn->prepare("UPDATE uploads SET caption = :caption, tags = :tags WHERE uploads_id = :postid");
+        $stmt = $conn->prepare("UPDATE uploads SET caption = :caption, tag = :tags WHERE uploads_id = :postid");
         $stmt->bindParam(':caption', $caption);
         $stmt->bindParam(':tags', $tagsString);
         $stmt->bindParam(':postid', $postid);
 
         if ($stmt->execute()) {
             // Redirect to the profile page
-            header("Location: profile.php");
+            header("Location: ../php/profile.php");
             exit();
         } else {
             // Error occurred while updating the post
@@ -134,6 +134,11 @@ $postTags = json_decode($row['tag']);
             </div>
             <div>
                 <label>| </label>
+                <input type="checkbox" name="tags[]" value="MOVIE" <?=(in_array('MOVIE', $postTags)) ? 'checked' : ''?>>
+                <label>MOVIE | &nbsp</label>
+            </div>
+            <div>
+                <label>| </label>
                 <input type="checkbox" name="tags[]" value="ANIME" <?=(in_array('ANIME', $postTags)) ? 'checked' : ''?>>
                 <label>ANIME | &nbsp</label>
             </div>
@@ -141,6 +146,21 @@ $postTags = json_decode($row['tag']);
                 <label>| </label>
                 <input type="checkbox" name="tags[]" value="KPOP" <?=(in_array('KPOP', $postTags)) ? 'checked' : ''?>>
                 <label>KPOP | &nbsp</label>
+            </div>
+            <div>
+                <label>| </label>
+                <input type="checkbox" name="tags[]" value="SPORTS" <?=(in_array('SPORTS', $postTags)) ? 'checked' : ''?>>
+                <label>SPORTS | &nbsp</label>
+            </div>
+            <div>
+                <label>| </label>
+                <input type="checkbox" name="tags[]" value="TECHNOLOGY" <?=(in_array('TECHNOLOGY', $postTags)) ? 'checked' : ''?>>
+                <label>TECH | &nbsp</label>
+            </div>
+            <div>
+                <label>| </label>
+                <input type="checkbox" name="tags[]" value="BLOG" <?=(in_array('BLOG', $postTags)) ? 'checked' : ''?>>
+                <label>BLOG | &nbsp</label>
             </div>
         </div>
         <div id="image-contain">
@@ -161,7 +181,7 @@ $postTags = json_decode($row['tag']);
         <div id="file-con">
         <label>New Image/Video</label>
         <i class="fa-regular fa-folder-open" style="color:#28AFB0; font-size: 1.5vw; margin-left:3vw; "></i>
-        <input id="pictures" type="file" accept="image/*" name="header" class="form-control" onchange="readURL(this, 'blah');" >
+        <input id="pictures" type="file" accept="image/*" name="file" class="form-control" onchange="readURL(this, 'blah');" >
         </div>
         <img id="blah" src="#" alt="" ></img>
         <div>

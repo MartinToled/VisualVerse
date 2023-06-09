@@ -4,7 +4,7 @@ require 'connect.php';
 
 // Check if the user is logged in
 if (!isset($_SESSION['id'])) {
-  header("Location: ../index.php");
+  header("Location: ../index.php"); // Redirect to the login page if not logged in
   exit();
 }
 
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Clear the session and redirect to the login page
   session_unset();
   session_destroy();
-  header("Location: ../index.php?error=resetsucs");
+  header("Location: ../index.php?error=resetsucs"); // Redirect to the login page with success message
   exit();
 }
 ?>
@@ -42,12 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
   <h2>Enter New Password</h2>
   <div id="form">
-  <form method="POST" action="reset-pass.php">
-    <label for="new_password">New Password:</label>
-    <input type="password" name="new_password" required>
-    <br>
-    <input type="submit" value="Reset Password">
-  </form>
+    <form method="POST" action="reset-pass.php">
+      <label for="new_password">New Password:</label>
+      <input type="password" name="new_password" required>
+      <br>
+      <input type="submit" value="Reset Password">
+    </form>
   </div>
 </body>
 </html>

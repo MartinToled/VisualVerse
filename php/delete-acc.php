@@ -10,7 +10,7 @@ if (!isset($_SESSION['id'])) {
 
 // Process the account deletion request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Delete user's posts
+    // Delete user's account along with its post, likes, etc.
     $user_id = $_SESSION['id'];
     $stmt = $conn->prepare("DELETE FROM uploads WHERE user_id = :user_id");
     $stmt->bindParam(':user_id', $user_id);
@@ -28,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bindParam(':user_id', $user_id);
     $stmt->execute();
 
-    // Delete user's account
     $stmt = $conn->prepare("DELETE FROM users WHERE id = :user_id");
     $stmt->bindParam(':user_id', $user_id);
     $stmt->execute();

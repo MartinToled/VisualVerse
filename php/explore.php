@@ -70,7 +70,7 @@ if (!isset($_SESSION['id'])) {
             </div>
            
             <?php
-    // Retrieve the tag from the button clicked
+    // If a specific tag is clicked, fetch uploads with the matching tag
     if (isset($_GET['tag'])) {
       $clickedTag = $_GET['tag'];
       
@@ -120,6 +120,7 @@ if (!isset($_SESSION['id'])) {
                    ?>
                    </div>
                    <?php
+                   // Display video if the file extension is a video
                         if ($file_extension == 'mp4' || $file_extension == 'webm') {?>
                         <div class="video-container">
                         <video id="vid" muted autoplay><source src='uploads/<?=$file_name?>' type='video/<?=$file_extension?>'></video>
@@ -135,6 +136,7 @@ if (!isset($_SESSION['id'])) {
                             </div>
                           </div>
                        <?php } 
+                       // Display image if the file extension is an image
                         elseif ($file_extension == 'jpg' || $file_extension == 'jpeg' || $file_extension == 'png' || $file_extension == 'gif'|| $file_extension == 'webp') {?>
                         <img class="post-img" width=600 src="uploads/<?=$file_name?>" alt='{$file_name}'>
                         <?php } 
@@ -150,6 +152,7 @@ if (!isset($_SESSION['id'])) {
                     </div>
                     <?php
                     
+                     // Display like button and number of likes
                     $liked = $conn->query("SELECT * FROM likes WHERE liked_user = ".$_SESSION['id']." AND post_like = ".$row['uploads_id']."");
                     if($liked->rowCount() == 1) {?>
                        <div id="buttonliked">
@@ -163,19 +166,18 @@ if (!isset($_SESSION['id'])) {
                         <span style="color:white"><?=$row['likes_count']?></span>
                          </div>
                    <?php }?>
-
-                   
                     </div>
+                    <!-- Display comments section for each upload-->
                     <div id= "comments">
                     <?php
                     $post_id = $row['uploads_id'];
 
                     // prepare a SQL statement to select all media files uploaded by the user
-                    $stmt_comm = $conn->prepare("SELECT comments.comments_id, comments.post_id, comments.comments, comments.user_id, comments.user_name, comments.created_at FROM comments 
-                                            INNER JOIN uploads ON comments.post_id = uploads.uploads_id WHERE uploads.uploads_id = :post_id ORDER BY created_at DESC");
+                    $stmt_comm = $conn->prepare("SELECT * FROM comments INNER JOIN uploads ON comments.post_id = uploads.uploads_id WHERE uploads.uploads_id = :post_id ORDER BY created_at DESC");
                     $stmt_comm->bindParam(':post_id', $post_id);
                     $stmt_comm->execute();
 
+                    // Fetch and display comments
                     $counter = 0;
                         if ($stmt_comm->rowCount() > 0) {
                             while ($result = $stmt_comm->fetch(PDO::FETCH_ASSOC)) {

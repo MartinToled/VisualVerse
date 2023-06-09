@@ -3,7 +3,7 @@ session_start();
 require 'connect.php';
 // Check if the user is logged in
 if (!isset($_SESSION['id'])) {
-  header("Location: ../index.php");
+  header("Location: ../index.php"); // Redirect to the index page if not logged in
   exit();
 }
 
@@ -47,7 +47,7 @@ if (!isset($_SESSION['id'])) {
         </ul>
         </section>
 
-        <!--current user's info and picture-->
+        <!-- Display current user's information and picture -->
         <?php
             $prof_id = $_SESSION['id'];
 
@@ -71,6 +71,7 @@ if (!isset($_SESSION['id'])) {
             }
         }
         ?>
+        <!-- Modal for displaying full-size image -->
         <div id="myModal" class="modal">
         <span class="close">&times;</span>
         <img class="modal-content" id="imgModal">
@@ -78,9 +79,10 @@ if (!isset($_SESSION['id'])) {
         </div>
         <div id="profile">
           <div id="upper_images">
-            <img id="header" src="<?=$header_pic?>" >
-            <img id="pfp"src="<?=$prof_pic?>" alt=<?=$disp['pfp']?>>
+            <img id="header" src="<?=$header_pic?>" >  <!-- Display header picture -->
+            <img id="pfp"src="<?=$prof_pic?>" alt=<?=$disp['pfp']?>> <!-- Display profile picture -->
           </div>
+          <!-- Display user's name, username, ID, and bio -->
             <div id="user_info">
               <div id="indexes">
                 <h1><?=$disp['firstname']?> <?=$disp['lastname']?></h1>
@@ -114,7 +116,7 @@ if (!isset($_SESSION['id'])) {
         <?php
             };
         ?>
-         <!--current user's posts-->
+         <!-- Fetch and display current user's posts-->
         <?php
             $user_id = $_SESSION['id'];
 
@@ -128,6 +130,7 @@ if (!isset($_SESSION['id'])) {
             $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
             $tags = json_decode($row['tag'], true);  // Convert the comma-separated string back to an array
         ?>
+         <!-- Display post information -->
             <div id="Posts">
                 <div id="edit-button">
                   <button class="edit-post" data-postid="<?=$row['uploads_id']?>"><i class="fas fa-edit"></i></button>
@@ -176,6 +179,7 @@ if (!isset($_SESSION['id'])) {
                 <br>
                 <div id="bottom_part">
                     <div id="comment-in">
+                        <!-- Form for submitting comments -->
                     <form method="post" action="../inc/comments-includes.php">
                         <input type="hidden" name="post_id" value="<?php echo $row['uploads_id']; ?>">
                         <input type="text" name="comment" id="comment" placeholder="Comment.." autocomplete="off" style="color: white"></input>
@@ -222,6 +226,7 @@ if (!isset($_SESSION['id'])) {
                         }
                         if ($stmt_comm->rowCount() > 3) {
                     ?>
+                      <!-- Display "Show More" button if there are more comments to show and also "Show Less" if it is wanted to be closed -->
                         <div id="showmoreless">
                             <button class="show-more-button"><i class="fa-solid fa-angles-down" style="color:#28AFB0"></i> Show More</button>
                             <button class="show-less-button hidden-comment"><i class="fa-solid fa-angles-up" style="color:#28AFB0"></i> Show Less</button>

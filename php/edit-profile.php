@@ -30,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute();
 
     // Handle profile picture upload
-    if ($_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
-        $profilePicture = $_FILES['profile_picture'];
+    if ($_FILES['file']['error'] === UPLOAD_ERR_OK) {
+        $profilePicture = $_FILES['file'];
         $profilePictureName = $profilePicture['name'];
         $profilePictureTmpName = $profilePicture['tmp_name'];
         $profilePictureSize = $profilePicture['size'];
@@ -53,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Handle header picture upload
-    if ($_FILES['header_picture']['error'] === UPLOAD_ERR_OK) {
-        $headerPicture = $_FILES['header_picture'];
+    if ($_FILES['header']['error'] === UPLOAD_ERR_OK) {
+        $headerPicture = $_FILES['header'];
         $headerPictureName = $headerPicture['name'];
         $headerPictureTmpName = $headerPicture['tmp_name'];
         $headerPictureSize = $headerPicture['size'];
