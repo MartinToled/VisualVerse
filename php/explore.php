@@ -60,8 +60,12 @@ if (!isset($_SESSION['id'])) {
                 <div id="tags">
                   <button class="tag-button" data-tag="music">MUSIC</button>
                   <button class="tag-button" data-tag="art">ART</button>
+                  <button class="tag-button" data-tag="movie">MOVIE</button>
                   <button class="tag-button" data-tag="anime">ANIME</button>
                   <button class="tag-button" data-tag="kpop">KPOP</button>
+                  <button class="tag-button" data-tag="sports">SPORTS</button>
+                  <button class="tag-button" data-tag="technology">TECHNOLOGY</button>
+                  <button class="tag-button" data-tag="blog">BLOG</button>
               </div>
             </div>
            

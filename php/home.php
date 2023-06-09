@@ -69,8 +69,12 @@ if (isset($_SESSION['error'])) {
                 <label>TAGS:</label>
                     <label><input type="checkbox" name="tags[]" value="MUSIC"> MUSIC</label>
                     <label><input type="checkbox" name="tags[]" value="ART"> ART</label>
+                    <label><input type="checkbox" name="tags[]" value="MOVIE"> MOVIE</label>
                     <label><input type="checkbox" name="tags[]" value="ANIME"> ANIME</label>
                     <label><input type="checkbox" name="tags[]" value="KPOP"> KPOP</label>
+                    <label><input type="checkbox" name="tags[]" value="SPORTS"> SPORTS</label>
+                    <label><input type="checkbox" name="tags[]" value="TECHNOLOGY"> TECHNOLOGY</label>
+                    <label><input type="checkbox" name="tags[]" value="BLOG"> BLOG</label>
                 </div>
 
 

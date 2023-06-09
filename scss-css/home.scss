@@ -327,6 +327,8 @@ body{
         }
     }
     #upload{
+        padding:5px 10px;
+
         border-radius:20px;
         align-self:flex-end;
         background-color: transparent;
@@ -706,12 +708,13 @@ body{
                 }
             }
             #upload{
+                padding:5px 10px;
                 border-radius:20px;
                 align-self:flex-end;
                 background-color: transparent;
                 margin-left: 16.5vw;
                 width: 30%;
-                height: 80%;
+                height: 100%;
                 color: white;
                 border: 2px solid #46CDCF;
                 font-weight: bolder;
