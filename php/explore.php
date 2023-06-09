@@ -41,7 +41,7 @@ if (!isset($_SESSION['id'])) {
             <li><a href="home.php">Home</a></li>
             <li><a href="explore.php">Explore</a></li>
             <li><a href="profile.php">Profile</a></li>
-            <li><a href="../includes/logout-includes.php" style="color:#46CDCF"><span>Logout</span></a></li>
+            <li><a href="../inc/logout-includes.php" style="color:#46CDCF"><span>Logout</span></a></li>
         </ul>
     </section>
 
