@@ -1,0 +1,149 @@
+@mixin breakpoint($min-width, $max-width) {
+    @media screen and (min-width: $min-width) and (max-width: $max-width) {
+        @content;
+    }
+  }
+  
+  @import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+  
+  *,
+  *::before,
+  *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  }
+  
+  html {
+  overflow: scroll;
+  overflow-x: hidden;
+  }
+  
+  ::-webkit-scrollbar {
+  width: 0;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+  }
+  
+  /* Optional: show position indicator in red */
+  ::-webkit-scrollbar-thumb {
+  background: #FF0000;
+  }
+  
+body{
+      overflow: hidden;
+      width: 95%;
+      max-width: 100%;
+      max-height: auto;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: 'Exo', sans-serif;
+      background-color:#2a2a2a;
+      display: flex;
+      flex-direction: row;
+}
+
+form{
+    display:flex;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+label{
+
+    font-size: 1.5vw;
+}
+
+input{
+    background-color: #111111;
+    color: white;
+    font-size: 1.5vw;
+    margin-bottom: 2vh;
+}
+
+h1{
+    color:white;
+    margin-left: 0vw;
+    font-size: 3vw;
+}
+
+#edit-form{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    width: 100%;
+    #caption-contain{
+        margin-top: 4vh;
+        margin-bottom: 8vh;
+        label{
+            display: flex;
+            flex-direction: row;
+        }
+        #caption{
+            margin-top: 0vh;
+            width: 30%;
+            height: 120%;
+            background-color: #111111;
+            color: white;
+            margin-left: 0.2vw;
+            resize: none;
+        }
+    }
+    #file-con{
+        display: flex;
+        background: transparent;
+        position:relative;
+        color:white;
+        border-radius:20px;
+        text-align:center;
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+        float:left;
+        left: 0%;
+        cursor:pointer;
+        width: 30%;
+        font-size: 1.4vw;
+        opacity: 1;
+        #pictures{
+            position: absolute;
+            z-index: 1000;
+            opacity: 0;
+            cursor: pointer;
+            font-weight: bold;
+            float: left;
+            left: 2vw;
+            bottom:2px;
+        }
+    }
+
+    #tags{
+        display: flex;
+        height: 7vh;
+        font-size:2vw;
+        margin-bottom: 3vh;
+        label{
+            margin-top: 1vh;
+            color:white;
+        }
+        div{
+            label{
+
+                color:#28AFB0
+            }
+        }
+    }
+    #image-contain{
+        margin-top: 2vh;
+    }
+
+    button{
+        margin-bottom: 4vh;
+        width: 30%;
+        background-color: #28AFB0;
+        border-radius: 20px;
+        border: 1px solid #28AFB0;
+        font-size: 1.5vw;
+        height: 6vh;
+        margin-left: 45vw;
+    }
+}

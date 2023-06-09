@@ -1,0 +1,310 @@
+@mixin breakpoint($min-width, $max-width) {
+    @media screen and (min-width: $min-width) and (max-width: $max-width) {
+        @content;
+    }
+  }
+
+  @import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+  
+  *,
+  *::before,
+  *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  }
+  
+  html {
+  overflow: scroll;
+  overflow-x: hidden;
+  }
+  
+  ::-webkit-scrollbar {
+  width: 0;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+  }
+  
+  /* Optional: show position indicator in red */
+  ::-webkit-scrollbar-thumb {
+  background: #FF0000;
+  }
+  
+body{
+    overflow: hidden;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    font-family: 'Exo', sans-serif;
+    background-color: #2a2a2a;
+}
+
+#form{
+    display: flex;
+    flex-direction: column;
+    background-color:#2a2a2a;
+    width: 130%;
+    padding:8vh 4vw;
+    text-align: center;
+}
+
+#input{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3%;
+  margin-top: 0%;
+  width: 80%;
+  text-align: center;
+  align-self: center;
+  color: white;
+
+  #images{
+    contain: content;
+    margin-top: 4vh;
+  }
+
+      input{
+        margin-top: 4%;
+    }
+
+    #regtxt{
+        font-size: 12px;
+        text-align: left;
+        margin-left: 1%;
+        color: white;
+        #reg{
+            color:#28AFB0;
+        }
+    }
+
+    #text1{
+      margin-bottom: -2%;
+      font-size: 20px;
+  }
+
+    p{
+        font-size: 14px;
+        color: #28AFB0;
+    }
+
+    label{
+      font-size: 16px;
+      color: white;
+    }
+
+    #file-con{
+      display: flex;
+      background: transparent;
+      flex-direction: row;
+      position:relative;
+      color:#46CDCF;
+      border-radius:20px;
+      text-align:center;
+      float:left;
+      left: 0%;
+      cursor:pointer;
+      width: 100%;
+      font-size: 18px;
+      margin-bottom: 1%;
+      margin-top: 5%;
+      opacity: 1;
+      #pictures{
+          position: absolute;
+          z-index: 1000;
+          opacity: 0;
+          cursor: pointer;
+          font-weight: bold;
+          float: left;
+          left: 2vw;
+          bottom:2px;
+      }
+  }
+
+  #in{
+    height: 12vh;
+    margin-top: 2vh;
+  }
+
+    #inputs{
+      height: 10vh;
+      width: 80%;
+      background-color:#111111;
+      border-radius: 10px;
+      color: grey;
+      font-size: 14px;
+      margin-bottom: -5%;
+      margin-right: 8vw;
+    }
+
+    #welcome{
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 0%;
+      color: white;
+    }
+
+    
+    #button{
+      width: 60%;
+      height: 5vh;
+      align-self: center;
+      background-color: #28AFB0;
+      margin-left: 1%;
+      color: white;
+      font-weight: bolder;
+      border-radius: 5px;
+      font-size: 12px;
+      margin-top: 5vh;
+      margin-right: 16vw;
+    }
+
+    #blah{
+      margin-left: 20%;
+      margin-top: -10%;
+      img{
+        width: 5vw;
+      }
+    }
+}
+
+
+$bubble-count: 50;
+$sway-type: "sway-left-to-right", "sway-right-to-left";
+
+@function random_range($min, $max) {
+  $rand: random();
+  $random_range: $min + floor($rand * (($max - $min) + 1));
+  @return $random_range;
+}
+
+@function sample($list) {
+  @return nth($list, random(length($list)));
+}
+
+.bubbles {
+  background: url("../images/vvvv.png");
+  background-size: 100% 100%;
+  background-repeat:no-repeat;
+  position: relative;
+  width: 100%;
+  height:210vh;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  left: var(--bubble-left-offset);
+  bottom: -75%;
+  display: block;
+  width: var(--bubble-radius);
+  height: var(--bubble-radius);
+  border-radius: 50%;
+  animation: float-up var(--bubble-float-duration) var(--bubble-float-delay) ease-in infinite;
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 20%;
+    background-image: radial-gradient(
+        hsl(182, 100%, 80%),
+        hsl(182, 100%, 80%) 10%,
+        hsla(180, 100%, 80%, 0) 56%
+      );
+    border-radius: inherit;
+    animation: var(--bubble-sway-type) var(--bubble-sway-duration) var(--bubble-sway-delay) ease-in-out alternate infinite;
+  }
+
+  @for $i from 0 through $bubble-count {
+    &:nth-child(#{$i}) {
+      --bubble-left-offset: #{random_range(0vw, 100vw)};
+      --bubble-radius: #{random_range(1vw, 10vw)};
+      --bubble-float-duration: #{random_range(12s, 24s)};
+      --bubble-sway-duration: #{random_range(8s, 10s)};
+      --bubble-float-delay: #{random_range(0s, 2s)};
+      --bubble-sway-delay: #{random_range(0s, 2s)};
+      --bubble-sway-type: #{sample($sway-type)};
+    }
+  }
+}
+
+@keyframes float-up {
+  to {
+    transform: translateY(-300vh);
+  }
+}
+
+@keyframes sway-left-to-right {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes sway-right-to-left {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+
+@include breakpoint(0px, 640px){
+
+  #form{
+     width: 150%;
+     padding:35vh 8vw;
+     margin-top: -30vh;
+     background-color: rgba(42,42,42,0.3);
+    #input{
+      #welcome{
+        font-size: 10px;
+      }
+      #in{
+        height: 12vh;
+        margin-top: 0;
+      }
+      #inputs{
+        margin-top:6vh;
+        margin-right: 15vw;
+        width: 100%;
+      }
+      #button{
+        margin-top: 15%;
+        margin-right: 28vw;
+      }
+      #regtxt{
+        contain: content;
+        margin-top: 2%;
+        margin-bottom: 5vh;
+      }
+
+      #blah{
+        margin-left: 20%;
+        margin-top: -10%;
+        img{
+          width: 5vw;
+        }
+      }
+    }
+
+  }
+
+  .bubbles{
+    background-size: 100% 100%;
+    height: 100%;
+    position:fixed;
+    z-index: -1;
+  }
+
+}

@@ -1,0 +1,88 @@
+@mixin breakpoint($min-width, $max-width) {
+    @media screen and (min-width: $min-width) and (max-width: $max-width) {
+        @content;
+    }
+  }
+  
+  @import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+  
+  *,
+  *::before,
+  *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  }
+  
+  html {
+  overflow: scroll;
+  overflow-x: hidden;
+  }
+  
+  ::-webkit-scrollbar {
+  width: 0;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+  }
+  
+  /* Optional: show position indicator in red */
+  ::-webkit-scrollbar-thumb {
+  background: #FF0000;
+  }
+  
+body{
+      overflow: hidden;
+      width: 95%;
+      max-width: 100%;
+      max-height: auto;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: 'Exo', sans-serif;
+      background-color:#2a2a2a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30vh;
+}
+
+h2{
+    font-size: 42px;
+    color: #28AFB0;
+}
+
+form{
+    display:flex;
+    width: 100%;
+}
+label{
+    color: white;
+    align-items: center;
+    text-align: center;
+    margin: 1vh;
+    margin-right: 2vw;
+    font-size: 16px;
+}
+
+input{
+    align-items: center;
+    background-color: #111111;
+    color: white;
+    font-size: 14px;
+    margin-right: 2vw;
+}
+button{
+    margin-left: 1vw;
+    margin-right: 6vw;
+    background-color: #28AFB0;
+    color: white;
+}
+
+#form{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    #email{
+        width: 30vw;
+    }
+}

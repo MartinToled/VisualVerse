@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css?family=Exo:400,700");
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+}
+
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #FF0000;
+}
+
+body {
+  overflow: hidden;
+  width: 95%;
+  max-width: 100%;
+  max-height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Exo", sans-serif;
+  background-color: #2a2a2a;
+  display: flex;
+  flex-direction: row;
+}
+
+form {
+  display: flex;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+label {
+  font-size: 1.5vw;
+}
+
+input {
+  background-color: #111111;
+  color: white;
+  font-size: 1.5vw;
+  margin-bottom: 2vh;
+}
+
+h1 {
+  color: white;
+  margin-left: 0vw;
+  font-size: 3vw;
+}
+
+#edit-form {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  width: 100%;
+}
+#edit-form #caption-contain {
+  margin-top: 4vh;
+  margin-bottom: 8vh;
+}
+#edit-form #caption-contain label {
+  display: flex;
+  flex-direction: row;
+}
+#edit-form #caption-contain #caption {
+  margin-top: 0vh;
+  width: 30%;
+  height: 120%;
+  background-color: #111111;
+  color: white;
+  margin-left: 0.2vw;
+  resize: none;
+}
+#edit-form #file-con {
+  display: flex;
+  background: transparent;
+  position: relative;
+  color: white;
+  border-radius: 20px;
+  text-align: center;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  float: left;
+  left: 0%;
+  cursor: pointer;
+  width: 30%;
+  font-size: 1.4vw;
+  opacity: 1;
+}
+#edit-form #file-con #pictures {
+  position: absolute;
+  z-index: 1000;
+  opacity: 0;
+  cursor: pointer;
+  font-weight: bold;
+  float: left;
+  left: 2vw;
+  bottom: 2px;
+}
+#edit-form #tags {
+  display: flex;
+  height: 7vh;
+  font-size: 2vw;
+  margin-bottom: 3vh;
+}
+#edit-form #tags label {
+  margin-top: 1vh;
+  color: white;
+}
+#edit-form #tags div label {
+  color: #28AFB0;
+}
+#edit-form #image-contain {
+  margin-top: 2vh;
+}
+#edit-form button {
+  margin-bottom: 4vh;
+  width: 30%;
+  background-color: #28AFB0;
+  border-radius: 20px;
+  border: 1px solid #28AFB0;
+  font-size: 1.5vw;
+  height: 6vh;
+  margin-left: 45vw;
+}/*# sourceMappingURL=post-edit.css.map */
