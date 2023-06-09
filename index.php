@@ -2,13 +2,14 @@
 
 <html>
     <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="scss-css/signin.css">
-    <link rel="icon" type="image/png" href="favicon.ico">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/3a5712755a.js" crossorigin="anonymous"></script>
+        <!-- Set character encoding and viewport for responsive design -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" href="scss-css/signin.css">   <!-- Link to external CSS stylesheet -->
+        <link rel="icon" type="image/png" href="favicon.ico">   <!-- Link to favicon -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  <!-- Include jQuery library -->
+        <script src="https://kit.fontawesome.com/3a5712755a.js" crossorigin="anonymous"></script>  <!-- Include Font Awesome icons library -->
     </head>
     
     <body>
@@ -50,14 +51,14 @@
                 }
                 ?>
                     <input id="button" type="submit" value="Log in" name="login" style="font-family: 'Exo', sans-serif;">
-                    <p id="regtxt">New to prompty? <a href="php/signup.php" id="reg">Register</a></p>
+                    <p id="regtxt">New to VisualVerse? <a href="php/signup.php" id="reg">Register</a></p>
                 </form>
                
             </div>
         </div>
         <div class="glitch">
-  
-</div>
+            <!-- Placeholder for the GIF -->
+        </div>
     </body>
 
 </html>

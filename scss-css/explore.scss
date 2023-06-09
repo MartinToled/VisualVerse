@@ -299,6 +299,7 @@ body{
     }
     #tags{
         display: flex;
+        flex-wrap: wrap;
         flex-direction: row;
         margin-left: 20vw;
         margin-bottom: 3vh;
@@ -648,8 +649,9 @@ body{
         }
         #tags{
             display: flex;
+            flex-wrap: wrap;
             flex-direction: row;
-            margin-left: 20vw;
+            margin-left: 10vw;
             margin-bottom: 3vh;
             button{
                 display: flex;
