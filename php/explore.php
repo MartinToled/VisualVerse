@@ -94,123 +94,111 @@ if (!isset($_SESSION['id'])) {
         $stmt->execute();
     }
 
-    if ($stmt->rowCount() > 0) {
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $file_name = $row['name'];
-            $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-            $tags = json_decode($row['tag'], true);  // Convert the comma-separated string back to an array
-?>
-        <div id="myModal" class="modal">
-        <img class="modal-content" id="imgModal">
-        <span class="close">&times;</span>
-        <div id="caption"></div>
-        </div>
-            <div id="Posts">
-                <div id="media">
-                    <div id="username"><h3><?=$row['user_name']?></h3></div>
-                    <div id="caption"><p><?=$row['caption']?></p></div>
-                    <div id = "tag-contain">
-                <?php 
-                     if (!is_null($tags)) {
-                      echo '<span id="headtag">Tags: &nbsp</span>';
-                      foreach ($tags as $tag) {
-                          echo '<span id="tag"> | ' . $tag . ' |  &nbsp</span>';
-                      }
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $file_name = $row['images'];
+        $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+        $tags = json_decode($row['tag'], true);  // Convert the comma-separated string back to an array
+    ?>
+     <!-- Display post information -->
+        <div id="Posts">
+            <div id="media">
+            <div id="username"><h3><?=$row['user_name']?></h3></div>
+            <div id="caption"><p><?=$row['caption']?></p></div>
+            <div id = "tag-contain">
+            <?php 
+                 if (!is_null($tags)) {
+                  echo '<span id="headtag">Tags: &nbsp</span>';
+                  foreach ($tags as $tag) {
+                      echo '<span id="tag"> | ' . $tag . ' |  &nbsp</span>';
                   }
-                   ?>
-                   </div>
-                   <?php
-                   // Display video if the file extension is a video
-                        if ($file_extension == 'mp4' || $file_extension == 'webm') {?>
-                        <div class="video-container">
-                        <video id="vid" muted autoplay><source src='uploads/<?=$file_name?>' type='video/<?=$file_extension?>'></video>
-                          <div class="controls">
-                                <button class="playButton"><i class="fas fa-pause"></i></button>
-                                <input class="seek-bar" type="range" min="0" max="100" value="0">
+              }
+               ?>
+               </div>
+                <?php 
+                  if ($file_extension == 'mp4' || $file_extension == 'webm') {?>
+                    <div class="video-container">
+                    <video id="vid" muted autoplay><source src='../uploads/<?=$file_name?>' type='video/<?=$file_extension?>'></video>
+                      <div class="controls">
+                        <button class="playButton"><i class="fas fa-pause"></i></button>
+                        <input class="seek-bar" type="range" min="0" max="100" value="0">
 
-                                <div class="volume-container">
-                                <input type="range" class="volumeControl" min="0" max="1" step="0.01" value="1">
-                                </div>
-                                <button class="muteButton"><i class="fas fa-volume-off"></i></button>
-                                <button id="fullscreenButton" onclick="toggleFullscreen()"><i class="fas fa-expand"></i></button>
-                            </div>
-                          </div>
-                       <?php } 
-                       // Display image if the file extension is an image
-                        elseif ($file_extension == 'jpg' || $file_extension == 'jpeg' || $file_extension == 'png' || $file_extension == 'gif'|| $file_extension == 'webp') {?>
-                        <img class="post-img" width=600 src="uploads/<?=$file_name?>" alt='{$file_name}'>
-                        <?php } 
-                    ?>
-                    <br>
-                    <div id="bottom_part">
-                    <div id="comment-in">
-                    <form method="post" action="../inc/comments-includes.php">
-                        <input type="hidden" name="post_id" value="<?php echo $row['uploads_id']; ?>">
-                        <input type="text" name="comment" id="comment" placeholder="Comment.." autocomplete="off" style="color:white"></input>
-                        <button id="submit_comment" type="submit" placeholder="" name="submit_comment"><i class="fa-regular fa-paper-plane" style="color:#28AFB0;font-size:1.3vw;"></i></button>
-                    </form>
-                    </div>
-                    <?php
-                    
-                     // Display like button and number of likes
-                    $liked = $conn->query("SELECT * FROM likes WHERE liked_user = ".$_SESSION['id']." AND post_like = ".$row['uploads_id']."");
-                    if($liked->rowCount() == 1) {?>
-                       <div id="buttonliked">
-                            <img style='height:2.7vh;display:flex;' class="unlike" id="<?=$row['uploads_id']?>" src='../images/filled.png'></img> &nbsp;
-                            <span style="color:white"><?=$row['likes_count']?></span>
+                        <div class="volume-container">
+                          <input type="range" class="volumeControl" min="0" max="1" step="0.01" value="1">
                         </div>
-                        <?php
-                    }else{ ?>
-                        <div id="buttonunliked">
-                        <img  style='height:2.7vh;display:flex;' class="like" id="<?=$row['uploads_id']?>"src='../images/unfilled.png'></img> &nbsp;
-                        <span style="color:white"><?=$row['likes_count']?></span>
-                         </div>
-                   <?php }?>
+                        <button class="muteButton"><i class="fas fa-volume-off"></i></button>
+                        <button id="fullscreenButton" onclick="toggleFullscreen()"><i class="fas fa-expand"></i></button>
+                      </div>
+                      </div>
+                    <?php } 
+                    elseif ($file_extension == 'jpg' || $file_extension == 'jpeg' || $file_extension == 'png' || $file_extension == 'gif'|| $file_extension == 'webp') {?>
+                    <img class="post-img" width=600 src="../uploads/<?=$file_name?>" alt='{$file_name}'>
+                    <?php } 
+                ?>
+            <br>
+            <div id="bottom_part">
+                <div id="comment-in">
+                    <!-- Form for submitting comments -->
+                <form method="post" action="../inc/comments-includes.php">
+                    <input type="hidden" name="post_id" value="<?php echo $row['uploads_id']; ?>">
+                    <input type="text" name="comment" id="comment" placeholder="Comment.." autocomplete="off" style="color: white"></input>
+                    <button id="submit_comment" type="submit" placeholder="" name="submit_comment"> <i class="fa-regular fa-paper-plane" style="color:#28AFB0;"></i></button>
+                </form>
+                </div>
+                <?php
+                
+                $liked = $conn->query("SELECT * FROM likes WHERE liked_user =".$_SESSION['id']." AND post_like=".$row['uploads_id']."");
+                if($liked->rowCount() == 1){?>
+                    <div id="buttonliked">
+                        <img style='height:2.7vh;display:flex;' class="unlike" id="<?=$row['uploads_id']?>" src='../images/filled.png'></img> &nbsp;
+                        <span style="color:white;"><?=$row['likes_count']?></span>
                     </div>
-                    <!-- Display comments section for each upload-->
-                    <div id= "comments">
                     <?php
-                    $post_id = $row['uploads_id'];
+                }else{ ?>
+                    <div id="buttonunliked">
+                    <img  style='height:2.7vh;display:flex;' class="like" id="<?=$row['uploads_id']?>"src='../images/unfilled.png'></img> &nbsp;
+                    <span style="color:white;"><?=$row['likes_count']?></span>
+                     </div>
+               <?php }?>
+                    </div>
+                <div id= "comments">
+                <?php
+                $post_id = $row['uploads_id'];
+                // prepare a SQL statement to select all media files uploaded by the user
+                $stmt_comm = $conn->prepare("SELECT comments.comments_id, comments.post_id, comments.comments, comments.user_id, comments.user_name, comments.created_at FROM comments 
+                                        INNER JOIN uploads ON comments.post_id = uploads.uploads_id WHERE uploads.uploads_id = :post_id ORDER BY created_at DESC");
+                $stmt_comm->bindParam(':post_id', $post_id);
+                $stmt_comm->execute();
 
-                    // prepare a SQL statement to select all media files uploaded by the user
-                    $stmt_comm = $conn->prepare("SELECT * FROM comments INNER JOIN uploads ON comments.post_id = uploads.uploads_id WHERE uploads.uploads_id = :post_id ORDER BY created_at DESC");
-                    $stmt_comm->bindParam(':post_id', $post_id);
-                    $stmt_comm->execute();
-
-                    // Fetch and display comments
-                    $counter = 0;
-                        if ($stmt_comm->rowCount() > 0) {
-                            while ($result = $stmt_comm->fetch(PDO::FETCH_ASSOC)) {
-                                $commentClass = ($counter < 3) ? 'comment' : 'comment hidden-comment';
-                        ?>
-                                <div class="<?= $commentClass ?>">
-                                    <h3><?= $result['user_name'] ?></h3>
-                                    <p><?= $result['comments'] ?></p>
-                                    <p><?= $result['created_at'] ?></p>
-                                </div>
-                        <?php
-                                $counter++;
-                            }
-                            if ($stmt_comm->rowCount() > 3) {
-                        ?>
-                            <div id="showmoreless">
-                              <button class="show-more-button"><i class="fa-solid fa-angles-down" style="color:#28AFB0"></i> Show More</button>
-                              <button class="show-less-button hidden-comment"><i class="fa-solid fa-angles-up" style="color:#28AFB0"></i> Show Less</button>
-                            </div>
-                        <?php
-                            }
-                        }
-                        ?>
-                         </div>
+                $counter = 0;
+                if ($stmt_comm->rowCount() > 0) {
+                    while ($result = $stmt_comm->fetch(PDO::FETCH_ASSOC)) {
+                        $commentClass = ($counter < 3) ? 'comment' : 'comment hidden-comment';
+                ?>
+                        <div class="<?= $commentClass ?>">
+                            <h3><?= $result['user_name'] ?></h3>
+                            <p><?= $result['comments'] ?></p>
+                            <p><?= $result['created_at'] ?></p>
+                        </div>
+                <?php
+                        $counter++;
+                    }
+                    if ($stmt_comm->rowCount() > 3) {
+                ?>
+                  <!-- Display "Show More" button if there are more comments to show and also "Show Less" if it is wanted to be closed -->
+                    <div id="showmoreless">
+                        <button class="show-more-button"><i class="fa-solid fa-angles-down" style="color:#28AFB0"></i> Show More</button>
+                        <button class="show-less-button hidden-comment"><i class="fa-solid fa-angles-up" style="color:#28AFB0"></i> Show Less</button>
+                    </div>
+                <?php
+                    }
+                }
+                ?>
+                     </div>
                     </div>
                 </div>   
-
             <?php
-        }
-    } else {
-        echo '<p id="nopost">No posts found.</p>';
-    }
-    ?>
+            }
+            ?>   
         </div>
     </div>
 </body>
