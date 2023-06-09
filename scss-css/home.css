@@ -247,6 +247,9 @@ body {
   margin-right: auto;
   width: 50%;
 }
+#main #addPost .error {
+  color: white;
+}
 #main #addPost h1 {
   color: white;
   margin-left: auto;
